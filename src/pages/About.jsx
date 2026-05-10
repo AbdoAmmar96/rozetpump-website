@@ -43,38 +43,20 @@ export default function About() {
         </div>
       </section>
 
-      {/* Pillars */}
-      <section className="content-section" style={{ background: 'var(--gray-100)' }}>
+      {/* Pillars — plain headings + paragraphs (no cards) */}
+      <section className="content-section about-pillars-section">
         <div className="container">
-          <div className="section-heading">
-            <h2 className="section-title-red">The ROZET Difference</h2>
-            <p className="section-subtitle">What we stand for as engineers and as a partner.</p>
-          </div>
-
-          <div className="cards-grid">
+          <div className="about-pillars-list">
             {aboutSections.pillars.map((pillar, i) => (
-              <div key={i} className="feature-card">
-                <div className="icon">
-                  <i className={`bi ${pillar.icon}`}></i>
-                </div>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.body}</p>
+              <div key={i} className="about-pillar">
+                <h3 className="about-pillar-title">{pillar.title}</h3>
+                <p className="about-pillar-body">{pillar.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA strip */}
-      <section className="cta-strip">
-        <div className="container">
-          <h2>Need a custom pump solution?</h2>
-          <p>Our engineers will help you specify the right pump for your project.</p>
-          <Link to="/contact" className="btn btn-primary">
-            Get in Touch <i className="bi bi-arrow-right"></i>
-          </Link>
-        </div>
-      </section>
     </>
   )
 }

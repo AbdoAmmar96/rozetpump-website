@@ -22,7 +22,7 @@ export default function ProductPage({ slug }) {
         </ul>
       )
     }
-    return <p style={{ color: 'var(--gray-700)', whiteSpace: 'pre-line' }}>{body}</p>
+    return <p style={{ color: 'var(--black)', whiteSpace: 'pre-line' }}>{body}</p>
   }
 
   return (
@@ -40,24 +40,99 @@ export default function ProductPage({ slug }) {
 
       <section className="product-detail">
         <div className="container">
-          {/* Intro: text left, image right */}
-          <div className="product-intro">
-            <div className="product-intro-text">
-              {product.intro && (
-                <p className="product-intro-lead">{product.intro}</p>
-              )}
+          {/* Intro: text left, image right — hidden when product has no intro content */}
+          {(product.intro || product.sections || product.heroImage) && (
+            <div className="product-intro">
+              <div className="product-intro-text">
+                {product.intro && (
+                  <p className="product-intro-lead">{product.intro}</p>
+                )}
 
-              {product.sections && product.sections.length > 0 && (
-                <div className="product-tech-desc">
-                  {product.sections.map((s, i) => (
-                    <div key={i} className="tech-section">
-                      <h3 className="tech-heading">{s.heading}</h3>
-                      {renderBody(s.body)}
-                    </div>
-                  ))}
+                {product.sections && product.sections.length > 0 && (
+                  <div className="product-tech-desc">
+                    {product.sections.map((s, i) => (
+                      <div key={i} className="tech-section">
+                        <h3 className="tech-heading">{s.heading}</h3>
+                        {renderBody(s.body)}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {product.relatedDownload && !product.afterModelsSections && (
+                  <a
+                    href={product.relatedDownload.pdf}
+                    className="btn-download-wide"
+                    target="_blank"
+                    rel="noreferrer"
+                    download
+                  >
+                    {product.relatedDownload.label || 'Download Pdf'}
+                  </a>
+                )}
+              </div>
+
+              {product.heroImage && (
+                <div className="product-intro-image">
+                  <img
+                    src={product.heroImage}
+                    alt={product.title}
+                    className="product-hero-img"
+                  />
                 </div>
               )}
+            </div>
+          )}
 
+          {/* Models — minimal: image + name + CTA */}
+          {product.models && product.models.length > 0 && (
+            <div className="product-models">
+              {product.modelsHeading && (
+                <h3 className="models-heading">{product.modelsHeading}</h3>
+              )}
+              <div className="models-grid-clean">
+                {product.models.map((model, i) => (
+                  <div key={i} className="model-card-clean">
+                    <div className="model-img-clean">
+                      <img src={model.image} alt={model.name} loading="lazy" />
+                    </div>
+                    <h4>{model.name}</h4>
+                    {model.href ? (
+                      <Link to={model.href} className="model-cta">
+                        More Details <i className="bi bi-arrow-right"></i>
+                      </Link>
+                    ) : model.pdf ? (
+                      <a
+                        href={model.pdf}
+                        className="model-cta"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        More Details <i className="bi bi-arrow-right"></i>
+                      </a>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Secondary image (e.g. CDL/CDLF row on water-supply page) */}
+          {product.secondaryImage && (
+            <div className="product-secondary-image">
+              <img src={product.secondaryImage} alt={product.title} />
+            </div>
+          )}
+
+          {/* After-models sections (e.g. FEATURES AND USING LIMITS) + final download */}
+          {product.afterModelsSections && product.afterModelsSections.length > 0 && (
+            <div className="product-after-models">
+              {product.afterModelsSections.map((s, i) => (
+                <div key={i} className="tech-section">
+                  <h3 className="tech-heading">{s.heading}</h3>
+                  {renderBody(s.body)}
+                </div>
+              ))}
               {product.relatedDownload && (
                 <a
                   href={product.relatedDownload.pdf}
@@ -66,58 +141,14 @@ export default function ProductPage({ slug }) {
                   rel="noreferrer"
                   download
                 >
-                  Download Pdf
+                  {product.relatedDownload.label || 'Download Pdf'}
                 </a>
               )}
-            </div>
-
-            <div className="product-intro-image">
-              <div className="rozet-logo-stamp">
-                <img src="/images/Rozet-.png" alt="ROZET" />
-              </div>
-              <img
-                src={product.heroImage}
-                alt={product.title}
-                className="product-hero-img"
-              />
-            </div>
-          </div>
-
-          {/* Models — minimal: just image + name */}
-          {product.models && product.models.length > 0 && (
-            <div className="product-models">
-              <div className="models-grid-clean">
-                {product.models.map((model, i) => (
-                  <a
-                    key={i}
-                    className="model-card-clean"
-                    href={model.pdf || '#'}
-                    target={model.pdf ? '_blank' : undefined}
-                    rel="noreferrer"
-                    download={!!model.pdf}
-                  >
-                    <div className="model-img-clean">
-                      <img src={model.image} alt={model.name} loading="lazy" />
-                    </div>
-                    <h4>{model.name}</h4>
-                  </a>
-                ))}
-              </div>
             </div>
           )}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="cta-strip">
-        <div className="container">
-          <h2>Need a quote for {product.title}?</h2>
-          <p>Tell us your flow rate, head, and fluid type — our engineers respond fast.</p>
-          <Link to="/contact" className="btn btn-primary">
-            Request a Quote <i className="bi bi-arrow-right"></i>
-          </Link>
-        </div>
-      </section>
     </>
   )
 }

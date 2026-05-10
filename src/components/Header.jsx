@@ -28,12 +28,6 @@ export default function Header() {
             <i className="bi bi-envelope-fill"></i>
             <span>Email : {siteInfo.email}</span>
           </span>
-          <div className="top-bar-social">
-            <a href={siteInfo.social.facebook} aria-label="Facebook"><i className="bi bi-facebook"></i></a>
-            <a href={siteInfo.social.twitter} aria-label="Twitter"><i className="bi bi-twitter"></i></a>
-            <a href={siteInfo.social.linkedin} aria-label="LinkedIn"><i className="bi bi-linkedin"></i></a>
-            <a href={siteInfo.social.pinterest} aria-label="Pinterest"><i className="bi bi-pinterest"></i></a>
-          </div>
         </div>
       </div>
 

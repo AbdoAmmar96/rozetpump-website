@@ -50,11 +50,6 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="container footer-bottom-inner">
           <p>Copyright © {year} by <a href="/" className="brand-link">ROZET</a> | All rights reserved</p>
-          <p className="agency-credit">
-            © {year} <a href="#" target="_blank" rel="noreferrer">Business Partner for Information Technology</a>. All rights reserved.
-            <br />
-            <span dir="rtl" lang="ar">© {year} <a href="#" target="_blank" rel="noreferrer">شركة شريك الأعمال لتقنية المعلومات</a>. جميع الحقوق محفوظة.</span>
-          </p>
         </div>
       </div>
     </footer>
