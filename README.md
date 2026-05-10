@@ -1,6 +1,7 @@
 # ROZET Pump Website — React + Vite
 
 A full migration of `rozetpump.com` from WordPress to a modern React + Vite stack. No dashboard / backend — pure frontend with all content in a centralized data file you can edit directly.
+
 🌐 **Live demo:** https://rozetpump.com/
 
 ## What's included
